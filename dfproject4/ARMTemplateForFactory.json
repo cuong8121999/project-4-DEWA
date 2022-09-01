@@ -1077,7 +1077,7 @@
 					"sources": [
 						{
 							"dataset": {
-								"referenceName": "NYC_Payroll_2021_SQL_DB",
+								"referenceName": "NYC_Payroll",
 								"type": "DatasetReference"
 							},
 							"name": "payroll2021"
@@ -1141,7 +1141,8 @@
 						"     allowSchemaDrift: true,",
 						"     validateSchema: false,",
 						"     isolationLevel: 'READ_UNCOMMITTED',",
-						"     format: 'table') ~> payroll2021",
+						"     format: 'table',",
+						"     staged: true) ~> payroll2021",
 						"source(output(",
 						"          FiscalYear as short,",
 						"          PayrollNumber as short,",
@@ -1193,7 +1194,7 @@
 				}
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/datasets/NYC_Payroll_2021_SQL_DB')]",
+				"[concat(variables('factoryId'), '/datasets/NYC_Payroll')]",
 				"[concat(variables('factoryId'), '/datasets/payroll_2020')]",
 				"[concat(variables('factoryId'), '/datasets/NYC_Payroll_Summary')]"
 			]
