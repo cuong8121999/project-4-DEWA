@@ -29,227 +29,13 @@
 	},
 	"resources": [
 		{
-			"name": "[concat(parameters('factoryName'), '/pipeline1')]",
+			"name": "[concat(parameters('factoryName'), '/Pipeline Aggregate Data')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"activities": [
 					{
-						"name": "Data flow1",
-						"type": "ExecuteDataFlow",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "0.12:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"dataflow": {
-								"referenceName": "load_payroll2021_to_sqldb",
-								"type": "DataFlowReference",
-								"parameters": {},
-								"datasetParameters": {
-									"payroll2021": {},
-									"dbpayroll": {}
-								}
-							},
-							"staging": {},
-							"compute": {
-								"coreCount": 8,
-								"computeType": "General"
-							},
-							"traceLevel": "Fine"
-						}
-					}
-				],
-				"policy": {
-					"elapsedTimeMetric": {},
-					"cancelAfter": {}
-				},
-				"annotations": [],
-				"lastPublishTime": "2022-09-01T15:50:10Z"
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/dataflows/load_payroll2021_to_sqldb')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/pipeline2')]",
-			"type": "Microsoft.DataFactory/factories/pipelines",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"activities": [
-					{
-						"name": "load_emp_to_synapse_pool",
-						"type": "ExecuteDataFlow",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "0.12:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"dataflow": {
-								"referenceName": "load_emp_to_synapse_pool",
-								"type": "DataFlowReference",
-								"parameters": {},
-								"datasetParameters": {
-									"EmpSource": {},
-									"EmpTarget": {}
-								}
-							},
-							"staging": {
-								"linkedService": {
-									"referenceName": "AzureDataLakeStorage1",
-									"type": "LinkedServiceReference"
-								},
-								"folderPath": "adlsnycpayroll-cuong-lastintial/dirstaging"
-							},
-							"compute": {
-								"coreCount": 8,
-								"computeType": "General"
-							},
-							"traceLevel": "Fine"
-						}
-					},
-					{
-						"name": "load_payroll2021_to_synapsepool",
-						"type": "ExecuteDataFlow",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "0.12:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"dataflow": {
-								"referenceName": "load_payroll2021_to_synapsepool",
-								"type": "DataFlowReference",
-								"parameters": {},
-								"datasetParameters": {
-									"Payroll2021Source": {},
-									"Payroll2021Target": {}
-								}
-							},
-							"staging": {
-								"linkedService": {
-									"referenceName": "AzureDataLakeStorage1",
-									"type": "LinkedServiceReference"
-								},
-								"folderPath": "adlsnycpayroll-cuong-lastintial/dirstaging"
-							},
-							"compute": {
-								"coreCount": 8,
-								"computeType": "General"
-							},
-							"traceLevel": "Fine"
-						}
-					},
-					{
-						"name": "load_agency_to_synapsepool",
-						"type": "ExecuteDataFlow",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "0.12:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"dataflow": {
-								"referenceName": "load_agency_to_synapsepool",
-								"type": "DataFlowReference",
-								"parameters": {},
-								"datasetParameters": {
-									"AgencySource": {},
-									"AgencyTarget": {}
-								}
-							},
-							"staging": {
-								"linkedService": {
-									"referenceName": "AzureDataLakeStorage1",
-									"type": "LinkedServiceReference"
-								},
-								"folderPath": "adlsnycpayroll-cuong-lastintial/dirstaging"
-							},
-							"compute": {
-								"coreCount": 8,
-								"computeType": "General"
-							},
-							"traceLevel": "Fine"
-						}
-					},
-					{
-						"name": "load_title_to_synapse_pool",
-						"type": "ExecuteDataFlow",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "0.12:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"dataflow": {
-								"referenceName": "load_title_to_synapse_pool",
-								"type": "DataFlowReference",
-								"parameters": {},
-								"datasetParameters": {
-									"TitleSource": {},
-									"TitleTarget": {}
-								}
-							},
-							"staging": {
-								"linkedService": {
-									"referenceName": "AzureDataLakeStorage1",
-									"type": "LinkedServiceReference"
-								},
-								"folderPath": "adlsnycpayroll-cuong-lastintial/dirstaging"
-							},
-							"compute": {
-								"coreCount": 8,
-								"computeType": "General"
-							},
-							"traceLevel": "Fine"
-						}
-					}
-				],
-				"policy": {
-					"elapsedTimeMetric": {},
-					"cancelAfter": {}
-				},
-				"annotations": [],
-				"lastPublishTime": "2022-09-01T16:13:36Z"
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/dataflows/load_emp_to_synapse_pool')]",
-				"[concat(variables('factoryId'), '/linkedServices/AzureDataLakeStorage1')]",
-				"[concat(variables('factoryId'), '/dataflows/load_payroll2021_to_synapsepool')]",
-				"[concat(variables('factoryId'), '/dataflows/load_agency_to_synapsepool')]",
-				"[concat(variables('factoryId'), '/dataflows/load_title_to_synapse_pool')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/pipeline3')]",
-			"type": "Microsoft.DataFactory/factories/pipelines",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"activities": [
-					{
-						"name": "Data flow1",
+						"name": "Dataflow Aggregate Data",
 						"type": "ExecuteDataFlow",
 						"dependsOn": [],
 						"policy": {
@@ -304,109 +90,268 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/AzureSqlTable1')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
+			"name": "[concat(parameters('factoryName'), '/Pipeline Load Agency Table to Synapse SQL Pool')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
 			"properties": {
-				"linkedServiceName": {
-					"referenceName": "AzureSqlDatabase1",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "AzureSqlTable",
-				"schema": [
+				"activities": [
 					{
-						"name": "FiscalYear",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "PayrollNumber",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "AgencyID",
-						"type": "varchar"
-					},
-					{
-						"name": "AgencyName",
-						"type": "varchar"
-					},
-					{
-						"name": "EmployeeID",
-						"type": "varchar"
-					},
-					{
-						"name": "LastName",
-						"type": "varchar"
-					},
-					{
-						"name": "FirstName",
-						"type": "varchar"
-					},
-					{
-						"name": "AgencyStartDate",
-						"type": "date"
-					},
-					{
-						"name": "WorkLocationBorough",
-						"type": "varchar"
-					},
-					{
-						"name": "TitleCode",
-						"type": "varchar"
-					},
-					{
-						"name": "TitleDescription",
-						"type": "varchar"
-					},
-					{
-						"name": "LeaveStatusasofJune30",
-						"type": "varchar"
-					},
-					{
-						"name": "BaseSalary",
-						"type": "float",
-						"precision": 15
-					},
-					{
-						"name": "PayBasis",
-						"type": "varchar"
-					},
-					{
-						"name": "RegularHours",
-						"type": "float",
-						"precision": 15
-					},
-					{
-						"name": "RegularGrossPaid",
-						"type": "float",
-						"precision": 15
-					},
-					{
-						"name": "OTHours",
-						"type": "float",
-						"precision": 15
-					},
-					{
-						"name": "TotalOTPaid",
-						"type": "float",
-						"precision": 15
-					},
-					{
-						"name": "TotalOtherPay",
-						"type": "float",
-						"precision": 15
+						"name": "Dataflow Load Agency Table to Synapse SQL Pool",
+						"type": "ExecuteDataFlow",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataflow": {
+								"referenceName": "Dataflow Load Agency Table to Synapse SQL Pool",
+								"type": "DataFlowReference",
+								"parameters": {},
+								"datasetParameters": {
+									"AgencySource": {},
+									"AgencyTarget": {}
+								}
+							},
+							"staging": {
+								"linkedService": {
+									"referenceName": "AzureDataLakeStorage1",
+									"type": "LinkedServiceReference"
+								},
+								"folderPath": "adlsnycpayroll-cuong-lastintial/dirstaging"
+							},
+							"compute": {
+								"coreCount": 8,
+								"computeType": "General"
+							},
+							"traceLevel": "Fine"
+						}
 					}
 				],
-				"typeProperties": {
-					"schema": "dbo",
-					"table": "NYC_Payroll_Data"
-				}
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"annotations": []
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/AzureSqlDatabase1')]"
+				"[concat(variables('factoryId'), '/dataflows/Dataflow Load Agency Table to Synapse SQL Pool')]",
+				"[concat(variables('factoryId'), '/linkedServices/AzureDataLakeStorage1')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Pipeline Load Emp Table to Synapse SQL Pool')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Dataflow Load Emp Table to Synapse SQL Pool",
+						"type": "ExecuteDataFlow",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataflow": {
+								"referenceName": "Dataflow Load Emp Table to Synapse SQL Pool",
+								"type": "DataFlowReference",
+								"parameters": {},
+								"datasetParameters": {
+									"EmpSource": {},
+									"EmpTarget": {}
+								}
+							},
+							"staging": {
+								"linkedService": {
+									"referenceName": "AzureDataLakeStorage1",
+									"type": "LinkedServiceReference"
+								},
+								"folderPath": "adlsnycpayroll-cuong-lastintial/dirstaging"
+							},
+							"compute": {
+								"coreCount": 8,
+								"computeType": "General"
+							},
+							"traceLevel": "Fine"
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/dataflows/Dataflow Load Emp Table to Synapse SQL Pool')]",
+				"[concat(variables('factoryId'), '/linkedServices/AzureDataLakeStorage1')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Pipeline Load Payroll2021 From SQL DB to Synapse SQL Pool')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Dataflow Load PayRoll2021 Table From SQL to Synapse",
+						"type": "ExecuteDataFlow",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataflow": {
+								"referenceName": "Dataflow Load PayRoll2021 Table From SQL DB to Synapse SQL Pool",
+								"type": "DataFlowReference",
+								"parameters": {},
+								"datasetParameters": {
+									"Payroll2021Source": {},
+									"Payroll2021Target": {}
+								}
+							},
+							"staging": {
+								"linkedService": {
+									"referenceName": "AzureDataLakeStorage1",
+									"type": "LinkedServiceReference"
+								},
+								"folderPath": "adlsnycpayroll-cuong-lastintial/dirstaging"
+							},
+							"compute": {
+								"coreCount": 8,
+								"computeType": "General"
+							},
+							"traceLevel": "Fine"
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/dataflows/Dataflow Load PayRoll2021 Table From SQL DB to Synapse SQL Pool')]",
+				"[concat(variables('factoryId'), '/linkedServices/AzureDataLakeStorage1')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Pipeline Load Payroll2021 to SQL DB')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Dataflow Load PayRoll2021 Table To SQL DB",
+						"type": "ExecuteDataFlow",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataflow": {
+								"referenceName": "Dataflow Load PayRoll2021 Table To SQL DB",
+								"type": "DataFlowReference",
+								"parameters": {},
+								"datasetParameters": {
+									"payroll2021": {},
+									"dbpayroll": {}
+								}
+							},
+							"staging": {},
+							"compute": {
+								"coreCount": 8,
+								"computeType": "General"
+							},
+							"traceLevel": "Fine"
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"annotations": [],
+				"lastPublishTime": "2022-09-01T15:50:10Z"
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/dataflows/Dataflow Load PayRoll2021 Table To SQL DB')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Pipeline Load Title Table to Synapse SQL Pool')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Dataflow Load Title Table to Synapse SQL Pool",
+						"type": "ExecuteDataFlow",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataflow": {
+								"referenceName": "Dataflow Load Title Table to Synapse SQL Pool",
+								"type": "DataFlowReference",
+								"parameters": {},
+								"datasetParameters": {
+									"TitleSource": {},
+									"TitleTarget": {}
+								}
+							},
+							"staging": {
+								"linkedService": {
+									"referenceName": "AzureDataLakeStorage1",
+									"type": "LinkedServiceReference"
+								},
+								"folderPath": "adlsnycpayroll-cuong-lastintial/dirstaging"
+							},
+							"compute": {
+								"coreCount": 8,
+								"computeType": "General"
+							},
+							"traceLevel": "Fine"
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"annotations": [],
+				"lastPublishTime": "2022-09-01T16:13:36Z"
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/dataflows/Dataflow Load Title Table to Synapse SQL Pool')]",
+				"[concat(variables('factoryId'), '/linkedServices/AzureDataLakeStorage1')]"
 			]
 		},
 		{
@@ -513,6 +458,112 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/linkedServices/AzureSynapseAnalytics1')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/NYC_Payroll_2021_SQL_DB')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "FiscalYear",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "PayrollNumber",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "AgencyID",
+						"type": "varchar"
+					},
+					{
+						"name": "AgencyName",
+						"type": "varchar"
+					},
+					{
+						"name": "EmployeeID",
+						"type": "varchar"
+					},
+					{
+						"name": "LastName",
+						"type": "varchar"
+					},
+					{
+						"name": "FirstName",
+						"type": "varchar"
+					},
+					{
+						"name": "AgencyStartDate",
+						"type": "date"
+					},
+					{
+						"name": "WorkLocationBorough",
+						"type": "varchar"
+					},
+					{
+						"name": "TitleCode",
+						"type": "varchar"
+					},
+					{
+						"name": "TitleDescription",
+						"type": "varchar"
+					},
+					{
+						"name": "LeaveStatusasofJune30",
+						"type": "varchar"
+					},
+					{
+						"name": "BaseSalary",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "PayBasis",
+						"type": "varchar"
+					},
+					{
+						"name": "RegularHours",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "RegularGrossPaid",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "OTHours",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "TotalOTPaid",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "TotalOtherPay",
+						"type": "float",
+						"precision": 15
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "NYC_Payroll_Data"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureSqlDatabase1')]"
 			]
 		},
 		{
@@ -1026,7 +1077,7 @@
 					"sources": [
 						{
 							"dataset": {
-								"referenceName": "AzureSqlTable1",
+								"referenceName": "NYC_Payroll_2021_SQL_DB",
 								"type": "DatasetReference"
 							},
 							"name": "payroll2021"
@@ -1142,13 +1193,13 @@
 				}
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/datasets/AzureSqlTable1')]",
+				"[concat(variables('factoryId'), '/datasets/NYC_Payroll_2021_SQL_DB')]",
 				"[concat(variables('factoryId'), '/datasets/payroll_2020')]",
 				"[concat(variables('factoryId'), '/datasets/NYC_Payroll_Summary')]"
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/load_agency_to_synapsepool')]",
+			"name": "[concat(parameters('factoryName'), '/Dataflow Load Agency Table to Synapse SQL Pool')]",
 			"type": "Microsoft.DataFactory/factories/dataflows",
 			"apiVersion": "2018-06-01",
 			"properties": {
@@ -1206,7 +1257,7 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/load_emp_to_synapse_pool')]",
+			"name": "[concat(parameters('factoryName'), '/Dataflow Load Emp Table to Synapse SQL Pool')]",
 			"type": "Microsoft.DataFactory/factories/dataflows",
 			"apiVersion": "2018-06-01",
 			"properties": {
@@ -1266,7 +1317,7 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/load_payroll2021_to_sqldb')]",
+			"name": "[concat(parameters('factoryName'), '/Dataflow Load PayRoll2021 Table From SQL DB to Synapse SQL Pool')]",
 			"type": "Microsoft.DataFactory/factories/dataflows",
 			"apiVersion": "2018-06-01",
 			"properties": {
@@ -1275,97 +1326,7 @@
 					"sources": [
 						{
 							"dataset": {
-								"referenceName": "nycpayroll_2021",
-								"type": "DatasetReference"
-							},
-							"name": "payroll2021"
-						}
-					],
-					"sinks": [
-						{
-							"dataset": {
-								"referenceName": "AzureSqlTable1",
-								"type": "DatasetReference"
-							},
-							"name": "dbpayroll"
-						}
-					],
-					"transformations": [],
-					"scriptLines": [
-						"source(output(",
-						"          FiscalYear as string,",
-						"          PayrollNumber as string,",
-						"          AgencyCode as string,",
-						"          AgencyName as string,",
-						"          EmployeeID as string,",
-						"          LastName as string,",
-						"          FirstName as string,",
-						"          AgencyStartDate as string,",
-						"          WorkLocationBorough as string,",
-						"          TitleCode as string,",
-						"          TitleDescription as string,",
-						"          LeaveStatusasofJune30 as string,",
-						"          BaseSalary as string,",
-						"          PayBasis as string,",
-						"          RegularHours as string,",
-						"          RegularGrossPaid as string,",
-						"          OTHours as string,",
-						"          TotalOTPaid as string,",
-						"          TotalOtherPay as string",
-						"     ),",
-						"     allowSchemaDrift: true,",
-						"     validateSchema: false,",
-						"     ignoreNoFilesFound: false) ~> payroll2021",
-						"payroll2021 sink(allowSchemaDrift: true,",
-						"     validateSchema: false,",
-						"     input(",
-						"          FiscalYear as integer,",
-						"          PayrollNumber as integer,",
-						"          AgencyID as string,",
-						"          AgencyName as string,",
-						"          EmployeeID as string,",
-						"          LastName as string,",
-						"          FirstName as string,",
-						"          AgencyStartDate as date,",
-						"          WorkLocationBorough as string,",
-						"          TitleCode as string,",
-						"          TitleDescription as string,",
-						"          LeaveStatusasofJune30 as string,",
-						"          BaseSalary as double,",
-						"          PayBasis as string,",
-						"          RegularHours as double,",
-						"          RegularGrossPaid as double,",
-						"          OTHours as double,",
-						"          TotalOTPaid as double,",
-						"          TotalOtherPay as double",
-						"     ),",
-						"     deletable:false,",
-						"     insertable:true,",
-						"     updateable:false,",
-						"     upsertable:false,",
-						"     format: 'table',",
-						"     skipDuplicateMapInputs: true,",
-						"     skipDuplicateMapOutputs: true,",
-						"     errorHandlingOption: 'stopOnFirstError') ~> dbpayroll"
-					]
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/datasets/nycpayroll_2021')]",
-				"[concat(variables('factoryId'), '/datasets/AzureSqlTable1')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/load_payroll2021_to_synapsepool')]",
-			"type": "Microsoft.DataFactory/factories/dataflows",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"type": "MappingDataFlow",
-				"typeProperties": {
-					"sources": [
-						{
-							"dataset": {
-								"referenceName": "AzureSqlTable1",
+								"referenceName": "NYC_Payroll_2021_SQL_DB",
 								"type": "DatasetReference"
 							},
 							"name": "Payroll2021Source"
@@ -1444,12 +1405,102 @@
 				}
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/datasets/AzureSqlTable1')]",
+				"[concat(variables('factoryId'), '/datasets/NYC_Payroll_2021_SQL_DB')]",
 				"[concat(variables('factoryId'), '/datasets/NYC_Payroll')]"
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/load_title_to_synapse_pool')]",
+			"name": "[concat(parameters('factoryName'), '/Dataflow Load PayRoll2021 Table To SQL DB')]",
+			"type": "Microsoft.DataFactory/factories/dataflows",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"type": "MappingDataFlow",
+				"typeProperties": {
+					"sources": [
+						{
+							"dataset": {
+								"referenceName": "nycpayroll_2021",
+								"type": "DatasetReference"
+							},
+							"name": "payroll2021"
+						}
+					],
+					"sinks": [
+						{
+							"dataset": {
+								"referenceName": "NYC_Payroll_2021_SQL_DB",
+								"type": "DatasetReference"
+							},
+							"name": "dbpayroll"
+						}
+					],
+					"transformations": [],
+					"scriptLines": [
+						"source(output(",
+						"          FiscalYear as string,",
+						"          PayrollNumber as string,",
+						"          AgencyCode as string,",
+						"          AgencyName as string,",
+						"          EmployeeID as string,",
+						"          LastName as string,",
+						"          FirstName as string,",
+						"          AgencyStartDate as string,",
+						"          WorkLocationBorough as string,",
+						"          TitleCode as string,",
+						"          TitleDescription as string,",
+						"          LeaveStatusasofJune30 as string,",
+						"          BaseSalary as string,",
+						"          PayBasis as string,",
+						"          RegularHours as string,",
+						"          RegularGrossPaid as string,",
+						"          OTHours as string,",
+						"          TotalOTPaid as string,",
+						"          TotalOtherPay as string",
+						"     ),",
+						"     allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     ignoreNoFilesFound: false) ~> payroll2021",
+						"payroll2021 sink(allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     input(",
+						"          FiscalYear as integer,",
+						"          PayrollNumber as integer,",
+						"          AgencyID as string,",
+						"          AgencyName as string,",
+						"          EmployeeID as string,",
+						"          LastName as string,",
+						"          FirstName as string,",
+						"          AgencyStartDate as date,",
+						"          WorkLocationBorough as string,",
+						"          TitleCode as string,",
+						"          TitleDescription as string,",
+						"          LeaveStatusasofJune30 as string,",
+						"          BaseSalary as double,",
+						"          PayBasis as string,",
+						"          RegularHours as double,",
+						"          RegularGrossPaid as double,",
+						"          OTHours as double,",
+						"          TotalOTPaid as double,",
+						"          TotalOtherPay as double",
+						"     ),",
+						"     deletable:false,",
+						"     insertable:true,",
+						"     updateable:false,",
+						"     upsertable:false,",
+						"     format: 'table',",
+						"     skipDuplicateMapInputs: true,",
+						"     skipDuplicateMapOutputs: true,",
+						"     errorHandlingOption: 'stopOnFirstError') ~> dbpayroll"
+					]
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/nycpayroll_2021')]",
+				"[concat(variables('factoryId'), '/datasets/NYC_Payroll_2021_SQL_DB')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Dataflow Load Title Table to Synapse SQL Pool')]",
 			"type": "Microsoft.DataFactory/factories/dataflows",
 			"apiVersion": "2018-06-01",
 			"properties": {
