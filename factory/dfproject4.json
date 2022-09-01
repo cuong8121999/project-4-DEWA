@@ -1,0 +1,17 @@
+{
+	"name": "dfproject4",
+	"properties": {
+		"globalParameters": {
+			"fiscal_year_param": {
+				"type": "int",
+				"value": 2021
+			}
+		}
+	},
+	"location": "eastus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "e0889812-503d-46bb-8978-2025cbd99f51",
+		"tenantId": "9b7cbd77-6d6b-4879-8aba-63d7dfb18472"
+	}
+}
