@@ -1,9 +1,9 @@
 {
-	"name": "Pipeline Aggregate Data",
+	"name": "Pipeline Load Payroll2021 From SQL DB to Synapse SQL Pool",
 	"properties": {
 		"activities": [
 			{
-				"name": "Dataflow Aggregate Data",
+				"name": "Dataflow Load PayRoll2021 Table From SQL to Synapse",
 				"type": "ExecuteDataFlow",
 				"dependsOn": [],
 				"policy": {
@@ -16,14 +16,8 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataflow": {
-						"referenceName": "Dataflow Aggregate Data",
-						"type": "DataFlowReference",
-						"parameters": {
-							"dataflow_param_fiscalyear": {
-								"value": "@pipeline().globalParameters.fiscal_year_param",
-								"type": "Expression"
-							}
-						}
+						"referenceName": "Dataflow Load PayRoll2021 Table From SQL DB to Synapse SQL Pool",
+						"type": "DataFlowReference"
 					},
 					"staging": {
 						"linkedService": {
@@ -40,8 +34,6 @@
 				}
 			}
 		],
-		"annotations": [],
-		"lastPublishTime": "2022-09-01T17:28:25Z"
-	},
-	"type": "Microsoft.DataFactory/factories/pipelines"
+		"annotations": []
+	}
 }

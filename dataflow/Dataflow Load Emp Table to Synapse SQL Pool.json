@@ -1,5 +1,5 @@
 {
-	"name": "load_emp_to_synapse_pool",
+	"name": "Dataflow Load Emp Table to Synapse SQL Pool",
 	"properties": {
 		"type": "MappingDataFlow",
 		"typeProperties": {

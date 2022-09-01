@@ -1,5 +1,5 @@
 {
-	"name": "AzureSqlTable1",
+	"name": "NYC_Payroll_2021_SQL_DB",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "AzureSqlDatabase1",

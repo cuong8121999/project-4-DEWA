@@ -1,5 +1,5 @@
 {
-	"name": "load_agency_to_synapsepool",
+	"name": "Dataflow Load Agency Table to Synapse SQL Pool",
 	"properties": {
 		"type": "MappingDataFlow",
 		"typeProperties": {

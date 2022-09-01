@@ -1,5 +1,5 @@
 {
-	"name": "load_payroll2021_to_sqldb",
+	"name": "Dataflow Load PayRoll2021 Table To SQL DB",
 	"properties": {
 		"type": "MappingDataFlow",
 		"typeProperties": {
@@ -15,7 +15,7 @@
 			"sinks": [
 				{
 					"dataset": {
-						"referenceName": "AzureSqlTable1",
+						"referenceName": "NYC_Payroll_2021_SQL_DB",
 						"type": "DatasetReference"
 					},
 					"name": "dbpayroll"

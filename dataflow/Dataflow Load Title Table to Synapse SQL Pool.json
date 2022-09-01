@@ -1,5 +1,5 @@
 {
-	"name": "load_title_to_synapse_pool",
+	"name": "Dataflow Load Title Table to Synapse SQL Pool",
 	"properties": {
 		"type": "MappingDataFlow",
 		"typeProperties": {

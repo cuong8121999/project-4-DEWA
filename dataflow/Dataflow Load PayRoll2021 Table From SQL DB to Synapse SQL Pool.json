@@ -1,12 +1,12 @@
 {
-	"name": "load_payroll2021_to_synapsepool",
+	"name": "Dataflow Load PayRoll2021 Table From SQL DB to Synapse SQL Pool",
 	"properties": {
 		"type": "MappingDataFlow",
 		"typeProperties": {
 			"sources": [
 				{
 					"dataset": {
-						"referenceName": "AzureSqlTable1",
+						"referenceName": "NYC_Payroll_2021_SQL_DB",
 						"type": "DatasetReference"
 					},
 					"name": "Payroll2021Source"

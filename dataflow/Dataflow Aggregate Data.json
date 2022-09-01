@@ -6,7 +6,7 @@
 			"sources": [
 				{
 					"dataset": {
-						"referenceName": "AzureSqlTable1",
+						"referenceName": "NYC_Payroll_2021_SQL_DB",
 						"type": "DatasetReference"
 					},
 					"name": "payroll2021"
